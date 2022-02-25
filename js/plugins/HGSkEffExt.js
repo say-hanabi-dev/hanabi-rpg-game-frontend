@@ -255,7 +255,15 @@ Game_Battler.prototype.removeStatesAuto = function(timing){
 
 HGSkEffExt.stDepDmgPrsInfo = [//state dependent damage formula parse
     {skId: 56, stId: HGSkEffExt.getStId("frost"), addFormulaHead: "", addFormulaEnd: "+ b.mdf * 2"},
+    {skId: 174, stId: HGSkEffExt.getStId("frost"), addFormulaHead: "", addFormulaEnd: "+ b.mdf * 2"},
+    {skId: 244, stId: HGSkEffExt.getStId("frost"), addFormulaHead: "", addFormulaEnd: "+ b.mdf * 2"},
+    {skId: 314, stId: HGSkEffExt.getStId("frost"), addFormulaHead: "", addFormulaEnd: "+ b.mdf * 2"},
+    {skId: 356, stId: HGSkEffExt.getStId("frost"), addFormulaHead: "", addFormulaEnd: "+ b.mdf * 2"},
     {skId: 48, stId: HGSkEffExt.getStId("burn"), addFormulaHead: "(", addFormulaEnd: ") * 1.5"},
+    {skId: 166, stId: HGSkEffExt.getStId("burn"), addFormulaHead: "(", addFormulaEnd: ") * 1.5"},
+    {skId: 236, stId: HGSkEffExt.getStId("burn"), addFormulaHead: "(", addFormulaEnd: ") * 1.5"},
+    {skId: 306, stId: HGSkEffExt.getStId("burn"), addFormulaHead: "(", addFormulaEnd: ") * 1.5"},
+    {skId: 348, stId: HGSkEffExt.getStId("burn"), addFormulaHead: "(", addFormulaEnd: ") * 1.5"},
     {skId: 32, stId: HGSkEffExt.getStId("frost"), addFormulaHead: "(", addFormulaEnd: ") * 1.5"},
     {skId: -1, stId: [29], addFormulaHead: "(", addFormulaEnd: ") * 1.15"}//<0: any skill
 ];
@@ -300,12 +308,27 @@ HGSkEffExt.stDepPropPtTrans = function(target, formula){
 };
 
 HGSkEffExt.stDepAbsHit = [//state dependent absolute hit
-    {skId: 54, stId: HGSkEffExt.getStId("frost")}
+    {skId: 54, stId: HGSkEffExt.getStId("frost")},
+    {skId: 172, stId: HGSkEffExt.getStId("frost")},
+    {skId: 242, stId: HGSkEffExt.getStId("frost")},
+    {skId: 312, stId: HGSkEffExt.getStId("frost")},
+    {skId: 354, stId: HGSkEffExt.getStId("frost")}
 ];
 HGSkEffExt.stDepAddSt = [//state dependent add state
     {skId: 50, stId: [22], gid: 14},
+    {skId: 168, stId: [22], gid: 14},
+    {skId: 238, stId: [22], gid: 14},
+    {skId: 308, stId: [22], gid: 14},
+    {skId: 350, stId: [22], gid: 14},
     {skId: 53, stId: HGSkEffExt.getStId("frost"), gid: 14},
-    {skId: 20, perc: 20, gid: 14}
+    {skId: 171, stId: HGSkEffExt.getStId("frost"), gid: 14},
+    {skId: 241, stId: HGSkEffExt.getStId("frost"), gid: 14},
+    {skId: 311, stId: HGSkEffExt.getStId("frost"), gid: 14},
+    {skId: 353, stId: HGSkEffExt.getStId("frost"), gid: 14},
+    {skId: 20, perc: 20, gid: 14},
+    {skId: 138, perc: 20, gid: 14},
+    {skId: 208, perc: 20, gid: 14},
+    {skId: 278, perc: 20, gid: 14}
 ];
 HGSkEffExt._GameAction_apply = Game_Action.prototype.apply;
 Game_Action.prototype.apply = function(target){
