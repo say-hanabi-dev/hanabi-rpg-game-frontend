@@ -149,7 +149,12 @@ HGSkEffExt.getStId = function(stName){
 HGSkEffExt.acritSkId = [34, 91, 152, 186, 222, 256, 292, 326];//absolute critical damage
 HGSkEffExt.ancritSkId = [8];//absolute not critical damage
 HGSkEffExt.stDepCritSkId = [
-    {skId: 54, stId: HGSkEffExt.getStId("frost")}
+    {skId: 54, stId: HGSkEffExt.getStId("frost")},
+    {skId: 172, stId: HGSkEffExt.getStId("frost")},
+    {skId: 242, stId: HGSkEffExt.getStId("frost")},
+    {skId: 312, stId: HGSkEffExt.getStId("frost")},
+    {skId: 354, stId: HGSkEffExt.getStId("frost")},
+
 ];//state dependent critical damage
 HGSkEffExt._GameAction_makeDamageValue = Game_Action.prototype.makeDamageValue;
 Game_Action.prototype.makeDamageValue = function(target, critical) {
