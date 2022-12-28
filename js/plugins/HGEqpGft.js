@@ -15,6 +15,8 @@
  * at rpg_objects.js
  *      Method "Game_Battler.prototype.gainHp" is overwritten in 
  *      this plugin
+ *      Method "Game_Action.prototype.applyCritical" is overwritten in 
+ *      this plugin
  */
 
 var HGEqpGft = window.HGEqpGft || {} ;
@@ -40,7 +42,14 @@ Game_Battler.prototype.gainHp = function(value){
                 value *= Math.ceil(1 - HGEqpGft.shltEff.redDmg);
             }
         }
+        
     }
+    if (this.isActor()){
+        if (this.hasArmor($dataArmors[70]) && (value < 0)){//盾牌霸主：每次受伤不超过生命值上限的25%
+            value = Math.floor(((-value)>this.mhp*0.25)?(-this.mhp*0.25):value);
+        }
+    }
+    
     HGEqpGft._GameBattler_gainHp.call(this, value);
 };
 Game_Actor.prototype.paramPlus = function(paramId) {
@@ -97,3 +106,4 @@ Game_Action.prototype.executeDamage = function(target, value){
     }
     HGEqpGft._GameAction_executeDamage.call(this, target, value);
 };
+
