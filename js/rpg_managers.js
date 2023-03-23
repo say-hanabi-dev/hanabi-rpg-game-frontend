@@ -107,6 +107,7 @@ DataManager.loadDataFile = function(name, src) {
         };
     }else{
         if(name ==='$dataMap'){
+            PluginManager.setup($plugins);
             if(!$dataActors[1].note.includes("已获得名字")){
                 $dataActors[1].id = $zhujue[0].id;
                 $dataActors[1].name = $zhujue[0].name;
