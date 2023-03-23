@@ -61,7 +61,11 @@ HGMonNPCCore.jicunActor = function(){
     });
 }
 HGMonNPCCore.zhaohuiActor = function(){
-    var actors = $gameActors._data.filter(function(member){return !$gameParty.members().contains(member) && member._classId >= 2 && member._classId <= 4});
+    var actors = $gameActors._data.filter(function(member){
+        if(member)
+            if(member._classId)
+                return !$gameParty.members().contains(member) && member._classId >= 2 && member._classId <= 4;
+    });
     var choice = actors.map(function(member){return member.name()}).concat("取消");
     $gameMessage.add("要召回哪一位伙伴呢？");
     $gameMessage.add("需要1w金币才能抵消他们被你寄存时的寂寞哦~");
