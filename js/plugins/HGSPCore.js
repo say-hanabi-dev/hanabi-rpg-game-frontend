@@ -26,7 +26,8 @@ Game_Actor.prototype.point = function() {
 HGSPCore.GameActor_displayLevelUp = Game_Actor.prototype.displayLevelUp;
 Game_Actor.prototype.displayLevelUp = function(newSkills) {
     HGSPCore.GameActor_displayLevelUp.call(this,newSkills);
-    id = this._actorId;
+    var id = this._actorId;
+    var actor = $gameActors.actor(id);
     if(!actor._levelup) actor._levelup = 1;
     var count = this._level - actor._levelup;
     actor._levelup = this._level;

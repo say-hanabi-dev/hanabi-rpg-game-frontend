@@ -40,8 +40,9 @@ HGMonNPCCore.CreateActor = function(id,classid){
 
 HGMonNPCCore.AddActor = function(id){
     $gameParty.addActor(id);
-    if(!HGSPCore.level[id]) HGSPCore.level[id] = 1;
-    if(!HGSPCore.point[id]) HGSPCore.point[id] = 0;
+    var actor = $gameActors.actor(id);
+    if(!actor._levelup) actor._levelup = 1;
+    if(!actor._point) actor._point = 0;
 }
 HGMonNPCCore.RemoveActor = function(id){
     $gameParty.removeActor(id);
