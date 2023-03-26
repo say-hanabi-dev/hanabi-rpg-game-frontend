@@ -2565,7 +2565,7 @@ PluginManager.setup = function (plugins) {
     plugins.forEach(function (plugin) {
         if (plugin.status && !this._scripts.contains(plugin.name)) {
             this.setParameters(plugin.name, plugin.parameters);
-            this.loadScript(plugin.name + '.js');
+            this.loadScript(plugin.name + '.js?20230326');
             this._scripts.push(plugin.name);
         }
     }, this);
