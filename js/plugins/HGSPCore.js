@@ -88,7 +88,7 @@ HGSPCore.ShowSkills = function(){
     var cd = HGSPCore.skill.cd;
     var need = HGSPCore.skill.need;
     var des = $dataSkills[id].description;
-    var formula = HGSPCore.skill.formula;
+    var formula = HGSPCore.Getformula(id);
     
     $gameMessage.newPage();
     $gameMessage.add("\\n<" + name + ">CD:" + cd + "   需要技能点：" + need);
@@ -102,7 +102,7 @@ HGSPCore.ShowSkillsEX = function(skillname){
     var cd = HGSPCore.skill.cd;
     var need = HGSPCore.skill.need;
     var des = $dataSkills[id].description;
-    var formula = HGSPCore.skill.formula;
+    var formula = HGSPCore.Getformula(id);
     
     $gameMessage.newPage();
     $gameMessage.add("\\n<" + name + ">CD:" + cd + "   需要技能点：" + need + "   需要任意伙伴学会" + skillname);
@@ -110,6 +110,77 @@ HGSPCore.ShowSkillsEX = function(skillname){
     $gameMessage.add(des);
 }
 
+HGSPCore.Getformula = function(id){
+    if(id === 197) id = 205;    //任务了解
+    var result = "";
+    var skill = $dataSkills[id];
+    var formula = skill.damage.formula;
+
+    if(skill.damage.type === 1) result += "造成";
+    else if(skill.damage.type === 3) result += "恢复";
+    else if(skill.damage.type === 5) result += "吸取";
+    else return "";             //246是蓝量相关
+
+    //攻击等倍率
+    var key = /((\d+) ?\* ?)?a\..{3}( ?\* ?(\d+\.?(\d+)?))?(?!\))/ig;
+    var list = formula.match(key);
+    if(list){
+        for(var i = 0 ; i < list.length; i++){
+            var a = list[i].match(/((\d+\.?(\d+)?) ?\* ?)?a\.(.{3})( ?\* ?(\d+\.?(\d+)?))?/i);
+            var param = a[4] || "";
+            var mul = a[2] || a[6] || "1";
+            if(param != ""){
+                var plus = "";
+                if(i > 0) plus = "\\C[0]+";
+
+                if(param === "atk" && !result.includes("攻击力"))
+                    result += plus + "\\C[10]" + (parseFloat(mul) * 100) + "\%攻击力";
+                if(param === "mat" && !result.includes("魔法攻击力"))
+                    result += plus + "\\C[4]" + (parseFloat(mul) * 100) + "\%魔法攻击力";
+                if(param === "def" && !result.includes("防御力"))
+                    result += plus + "\\C[8]" + (parseFloat(mul) * 100) + "\%防御力";
+            }
+        }
+    }
+
+    //固定伤害
+    key = /(\d+ ?\+)|(\+ ?\d+)/ig;
+    var list2 = formula.match(key);
+    if(list2){
+        if(list){
+            for(var i = 0; i < list2.length; i++){
+                for(var j = 0; j < list.length; j++){
+                    if(list2[i] === list[j]){
+                        list2[i] = "";
+                        list[j] = "";
+                    }
+                }
+                if(list2[i] != ""){
+                    if(result.length > 2)result += "\\C[0]+" + list2[i].match(/\d+/i);
+                    else result += "\\C[0]" + list2[i].match(/\d+/i);
+                    break;
+                }
+            }
+        }
+    }
+    //只有固定伤害
+    if(result.length === 2){
+        var list3 = formula.match(/\d+/i);
+        if(list3)
+            result += list3[0];
+    }
+
+    if(skill.damage.type === 1){
+        if(formula.match(/b.def/i))
+            result += "\\C[2]物理伤害\\C[0]";
+        else if(formula.match(/b.mdf/i))
+            result += "\\C[1]魔法伤害\\C[0]";
+        else result += "\\C[0]真实伤害";
+    }
+    if(skill.damage.type === 3 || skill.damage.type === 5) result += "\\C[3]生命值\\C[0]";
+
+    return result;
+}
 
 
 HGSPCore.lightline2 = function(list1,list2){
