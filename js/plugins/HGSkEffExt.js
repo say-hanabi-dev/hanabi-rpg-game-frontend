@@ -434,18 +434,16 @@ HGSkEffExt.gainbuff = function(target, skill){
             if(flag === 2) list = [85,88];
             
             var j = list[0];
-            while(j < list[1]){
-                for(var k = 0; k < $gameTroop.members().length; k++){
-                    if($gameTroop.members()[k].isStateAffected(j))
-                        if($gameTroop.members()[k] === target){
-                            flag = 0;
-                            break;
-                        }
-                        else
-                            j++;
-                    
-                }
+            for(var k = 0; k < $gameTroop.members().length; k++){
+                if($gameTroop.members()[k].isStateAffected(j))
+                    if($gameTroop.members()[k] === target){
+                        flag = 0;
+                        break;
+                    }
+                    else
+                        j++;
             }
+            
             if(flag === 0) $dataStates[j].note = "";
             target.addState(j);
 
