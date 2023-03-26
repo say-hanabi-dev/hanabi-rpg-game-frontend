@@ -196,17 +196,19 @@ Game_Action.prototype.numRepeats = function(){
             return HGSkEffExt.custRepSkId[i].repeat 
                 + ((('add' in HGSkEffExt.custRepSkId[i]) && 
                     ((!('cond' in HGSkEffExt.custRepSkId[i])) || (HGSkEffExt.custRepSkId[i].cond(this.item))))?(HGSkEffExt.custRepSkId[i].add):0);
-        }else if(DataManager.isSkill(this.item())){
-            var skill = this.item();
-            for(var k = 0; k < HGSkEffExt.strepeats.length; k++)
-                if(skill.id === HGSkEffExt.strepeats[k].id){
-                    var states = this.states();
-                    for(var j = 0; j < states.length; j++)
-                        if(states[j].name === HGSkEffExt.strepeats[k].state){
-                            return HGSkEffExt._GameAction_numRepeats.call(this) + HGSkEffExt.strepeats[j].add;
-                        }
-                }
         }
+    }
+
+    if(DataManager.isSkill(this.item())){
+        var skill = this.item();
+        for(var k = 0; k < HGSkEffExt.strepeats.length; k++)
+            if(skill.id === HGSkEffExt.strepeats[k].id){
+                var states = this.states();
+                for(var j = 0; j < states.length; j++)
+                    if(states[j].name === HGSkEffExt.strepeats[k].state){
+                        return HGSkEffExt._GameAction_numRepeats.call(this) + HGSkEffExt.strepeats[j].add;
+                    }
+            }
     }
     return HGSkEffExt._GameAction_numRepeats.call(this);
 };
@@ -292,15 +294,7 @@ Game_Battler.prototype.removeStatesAuto = function(timing){
 
 HGSkEffExt.stDepDmgPrsInfo = [//state dependent damage formula parse
     {skId: 56, stId: HGSkEffExt.getStId("frost"), addFormulaHead: "", addFormulaEnd: "+ b.mdf * 2"},
-    {skId: 174, stId: HGSkEffExt.getStId("frost"), addFormulaHead: "", addFormulaEnd: "+ b.mdf * 2"},
-    {skId: 244, stId: HGSkEffExt.getStId("frost"), addFormulaHead: "", addFormulaEnd: "+ b.mdf * 2"},
-    {skId: 314, stId: HGSkEffExt.getStId("frost"), addFormulaHead: "", addFormulaEnd: "+ b.mdf * 2"},
-    {skId: 356, stId: HGSkEffExt.getStId("frost"), addFormulaHead: "", addFormulaEnd: "+ b.mdf * 2"},
     {skId: 48, stId: HGSkEffExt.getStId("burn"), addFormulaHead: "(", addFormulaEnd: ") * 1.5"},
-    {skId: 166, stId: HGSkEffExt.getStId("burn"), addFormulaHead: "(", addFormulaEnd: ") * 1.5"},
-    {skId: 236, stId: HGSkEffExt.getStId("burn"), addFormulaHead: "(", addFormulaEnd: ") * 1.5"},
-    {skId: 306, stId: HGSkEffExt.getStId("burn"), addFormulaHead: "(", addFormulaEnd: ") * 1.5"},
-    {skId: 348, stId: HGSkEffExt.getStId("burn"), addFormulaHead: "(", addFormulaEnd: ") * 1.5"},
     {skId: 32, stId: HGSkEffExt.getStId("frost"), addFormulaHead: "(", addFormulaEnd: ") * 1.5"},
     {skId: -1, stId: [29], addFormulaHead: "(", addFormulaEnd: ") * 1.15"}//<0: any skill
 ];
@@ -490,9 +484,8 @@ HGSkEffExt.ifSt = [
     {id:163, need:"束缚", add:74},
     {id:164, need:"束缚", add:74},
     {id:166, need:"电击", add:74},
-    {id:166, add:76, own:true},
-    {id:175, add:77, own:true},
-    {id:176, add:78, own:true}
+    {id:166, add:78, own:true},
+    {id:175, add:79, own:true}
 ];
 
 HGSkEffExt.ifstgainbuff = function(subject,target,skill){
@@ -513,7 +506,6 @@ HGSkEffExt.ifstgainbuff = function(subject,target,skill){
                         target.addState(HGSkEffExt.ifSt[i].add);
                 }
             }
-            break;
         }
     }
 };
