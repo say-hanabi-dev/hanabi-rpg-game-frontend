@@ -383,8 +383,8 @@ Game_Action.prototype.apply = function(target){
     if(!target.result().missed && this.isSkill()){      //获得buff
         var item = this.item();
         HGSkEffExt.gainbuff(target,item);
-        HGSkEffExt.ifstgainbuff(this,target,item);
-        HGSkEffExt.zibao(this,item);
+        HGSkEffExt.ifstgainbuff(this.subject(),target,item);
+        HGSkEffExt.zibao(this.subject(),item);
     }
 };
 HGSkEffExt.gainbuff = function(target, skill){
