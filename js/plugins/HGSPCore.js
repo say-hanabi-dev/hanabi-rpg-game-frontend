@@ -132,13 +132,13 @@ HGSPCore.Getformula = function(id){
             if(param != ""){
                 var plus = "";
                 if(i > 0) plus = "\\C[0]+";
-
+                var number = Math.floor(parseFloat(mul) * 100)
                 if(param === "atk" && !result.includes("攻击力"))
-                    result += plus + "\\C[10]" + (parseFloat(mul) * 100) + "\%攻击力";
+                    result += plus + "\\C[10]" + number + "\%攻击力";
                 if(param === "mat" && !result.includes("魔法攻击力"))
-                    result += plus + "\\C[4]" + (parseFloat(mul) * 100) + "\%魔法攻击力";
+                    result += plus + "\\C[4]" + number + "\%魔法攻击力";
                 if(param === "def" && !result.includes("防御力"))
-                    result += plus + "\\C[8]" + (parseFloat(mul) * 100) + "\%防御力";
+                    result += plus + "\\C[8]" + number + "\%防御力";
             }
         }
     }
