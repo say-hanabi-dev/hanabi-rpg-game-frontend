@@ -134,6 +134,7 @@ HGSkEffExt.stInfo = [
     {name: "burn_500$", stId: [21, 24]},
     {name: "burn_50$", stId: [65]},
     {name: "burn_1perc$", stId: [28]},
+    {name: "elect_50$", stId: [80]},
     {name: "frost_d10atk2$", stId: [23, 66]},
     {name: "frost_d10atk3$", stId: [25]}
 ];
@@ -203,7 +204,7 @@ Game_Action.prototype.numRepeats = function(){
         var skill = this.item();
         for(var k = 0; k < HGSkEffExt.strepeats.length; k++)
             if(skill.id === HGSkEffExt.strepeats[k].id){
-                var states = this.states();
+                var states = this.subject().states();
                 for(var j = 0; j < states.length; j++)
                     if(states[j].name === HGSkEffExt.strepeats[k].state){
                         return HGSkEffExt._GameAction_numRepeats.call(this) + HGSkEffExt.strepeats[j].add;
@@ -216,7 +217,8 @@ Game_Action.prototype.numRepeats = function(){
 HGSkEffExt.tnDmgStId = [//turn based damage by states
     {id: HGSkEffExt.getStId("burn_500$"), dmg: 500, perc: false},
     {id: HGSkEffExt.getStId("burn_50$"), dmg: 50, perc: false},
-    {id: HGSkEffExt.getStId("burn_1perc$"), dmg: 1, perc: true}
+    {id: HGSkEffExt.getStId("burn_1perc$"), dmg: 1, perc: true},
+    {id: HGSkEffExt.getStId("elect_50$"), dmg: 50, perc: false}
 ];
 HGSkEffExt._GameBattlerBase_updateStateTurns = Game_BattlerBase.prototype.updateStateTurns;
 Game_Battler.prototype.updateStateTurns = function(){
