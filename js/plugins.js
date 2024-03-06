@@ -17,5 +17,6 @@ var $plugins =
 {"name":"HGSkipLdLst","status":true,"description":"Skip loading list, load the first save","parameters":{}},
 {"name":"HGParMax","status":true,"description":"属性值上限","parameters":{}},
 {"name":"HGMonNPCCore","status":true,"description":"怪物与伙伴特性","parameters":{}},
-{"name":"HGSPCore","status":true,"description":"获得与使用技能点","parameters":{}}
+{"name":"HGSPCore","status":true,"description":"获得与使用技能点","parameters":{}},
+{"name":"HGPZCore","status":true,"description":"解密本核心","parameters":{}}
 ];

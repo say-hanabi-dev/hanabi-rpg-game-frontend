@@ -78,6 +78,7 @@ HGSPCore.ChangeTarget = function(){
     $gameMessage.setChoices(choice, choice.length, 0)
     $gameMessage.setChoiceCallback(function(x){
         if(x < choice.length - 1) $gameVariables.setValue(70,list[x]);
+        $gameSwitches.setValue(40,0);
     })
 }
 
