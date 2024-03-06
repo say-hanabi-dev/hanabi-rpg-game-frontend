@@ -142,7 +142,6 @@ Game_Battler.prototype.gainHp = function (value) {
                 if (count === 1) {
                     $gameTroop.members()[0].appear();
                     $gameTroop.members()[0].setHp(0.75 * $dataEnemies[33].params[0]);
-                    alert($dataEnemies[33].params[0])
                     HGMonNPCCore.BossStage++;
                     for (var i = 4; i < 8; i++) {
                         $gameTroop.members()[i].transform(37);
@@ -151,9 +150,7 @@ Game_Battler.prototype.gainHp = function (value) {
                 }
             }
         } else if (HGMonNPCCore.BossStage === 3) {
-            alert(this.hp)
             if (this === $gameTroop.members()[0] && this.hp + value <= 0.25 * this.mhp) {
-                alert(2)
                 value = 0.25 * this.mhp - this.hp;
                 HGMonNPCCore.BossStage++;
                 this.hide();
